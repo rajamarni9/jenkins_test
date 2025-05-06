@@ -1,8 +1,6 @@
 pipeline {
-    agent {
-         label 'windows'
-    }
-    
+    agent any
+
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "MVN3"
@@ -12,15 +10,15 @@ pipeline {
         stage('pull scm') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: 'github', url: 'git@github.com:sathishbob/jenkins_test.git'
+                git credentialsId: 'github', url: 'git@github.com:rajamarni9/jenkins_test.git'
             }
         }
         
         stage('Build') {
             steps {
-                bat "mvn -Dmaven.test.failure.ignore=true -f api-gateway/ clean package"
+                sh "mvn -Dmaven.test.failure.ignore=true -f api-gateway/ clean package"
             }
-                            
+                    
         }
         
         stage('archive') {
@@ -37,7 +35,7 @@ pipeline {
         
         stage('test') {
             steps {
-                bat "echo testing"
+                sh "echo testing"
             }
         }
     }
