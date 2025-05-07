@@ -1,8 +1,6 @@
 pipeline {
-    agent any
-    
-    triggers {
-        cron("*/5 * * * *")
+    agent {
+        label 'windows'
     }
     
     tools {
